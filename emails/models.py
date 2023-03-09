@@ -14,5 +14,10 @@ class EmailAddress(Base):
 
     @validates('email')
     def validate_email(self, key, address):
-        pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\'
+        pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        if not re.fullmatch(pattern, address):
+            raise ValueError('Invalid email address')
+        if key != 'email':
+            raise ValueError('Key must be "email"')
+        return address
 
