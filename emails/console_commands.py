@@ -8,3 +8,4 @@ engine = create_engine('sqlite:///emails.db', echo=True)
 
 with Session(engine) as sess:
     sess.add(emails)
+    sess.commit()
